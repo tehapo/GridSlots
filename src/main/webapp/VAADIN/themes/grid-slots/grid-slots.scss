@@ -1,0 +1,88 @@
+// Global variable overrides. Must be declared before importing Valo.
+
+// Defines the plaintext font size, weight and family. Font size affects general component sizing.
+//$v-font-size: 16px;
+//$v-font-weight: 300;
+//$v-font-family: "Open Sans", sans-serif;
+
+// Defines the border used by all components.
+//$v-border: 1px solid (v-shade 0.7);
+//$v-border-radius: 4px;
+
+// Affects the color of some component elements, e.g Button, Panel title, etc
+//$v-background-color: hsl(210, 0%, 98%);
+// Affects the color of content areas, e.g  Panel and Window content, TextField input etc
+//$v-app-background-color: $v-background-color;
+
+// Affects the visual appearance of all components
+//$v-gradient: v-linear 8%;
+//$v-bevel-depth: 30%;
+//$v-shadow-opacity: 5%;
+
+// Defines colors for indicating status (focus, success, failure)
+//$v-focus-color: valo-focus-color(); // Calculates a suitable color automatically
+//$v-friendly-color: #2c9720;
+//$v-error-indicator-color: #ed473b;
+
+// For more information, see: https://vaadin.com/book/-/page/themes.valo.html
+// Example variants can be copy/pasted from https://vaadin.com/wiki/-/wiki/Main/Valo+Examples
+
+@import "../valo/valo.scss";
+
+@mixin grid-slots {
+  @include valo;
+  // Insert your own theme rules here
+
+  .v-grid-scroller-vertical::-webkit-scrollbar {
+      display: none;
+  }
+
+  .v-grid-scroller {
+      border: none;
+  }
+
+  .v-grid-row {
+      .v-grid-cell {
+          perspective: 200px;
+          height: 100px !important;
+          text-align: center;
+
+          img {
+              height: 80px;
+              width: 80px;
+              margin-top: 10px;
+          }
+      }
+
+      &:nth-child(1) .v-grid-cell img { transform: rotateX(40deg); opacity: 0.6; }
+      &:nth-child(2) .v-grid-cell img { transform: rotateX(20deg); opacity: 0.8; }
+      &:nth-child(4) .v-grid-cell img { transform: rotateX(-20deg); opacity: 0.8; }
+      &:nth-child(5) .v-grid-cell img { transform: rotateX(-40deg); opacity: 0.6; }
+      &:nth-child(6) .v-grid-cell img { transform: rotateX(-40deg); opacity: 0.6; }
+  }
+
+  .v-grid-tablewrapper {
+      border: none;
+  }
+
+  .v-grid-footer {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    border-radius: 10px;
+    @include box-sizing(border-box);
+
+    box-shadow: inset 0px 2px 7px rgba(0, 0, 0, 0.6);
+    background-color: transparent !important;
+    @include linear-gradient(to bottom,
+      rgba(0, 0, 0, 0.6) 0%,
+      rgba(0, 0, 0, 0.1) 20%,
+      rgba(255, 255, 255,0) 50%,
+      rgba(0, 0, 0, 0.1) 80%,
+      rgba(0, 0, 0, 0.6) 100%
+    );
+  }
+}
