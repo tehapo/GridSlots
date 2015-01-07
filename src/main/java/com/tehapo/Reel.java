@@ -9,6 +9,7 @@ import com.vaadin.ui.Grid;
 import com.vaadin.ui.renderer.ImageRenderer;
 import com.vaadin.util.ReflectTools;
 
+@SuppressWarnings("serial")
 public class Reel extends Grid {
 
     private ReelRoller reelRoller;

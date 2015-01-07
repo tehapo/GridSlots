@@ -6,6 +6,7 @@ import com.vaadin.ui.JavaScriptFunction;
 
 import elemental.json.JsonArray;
 
+@SuppressWarnings("serial")
 @JavaScript("reelroller.js")
 public class ReelRoller extends AbstractJavaScriptExtension {
 
