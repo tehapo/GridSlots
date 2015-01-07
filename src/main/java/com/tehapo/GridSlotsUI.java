@@ -4,6 +4,7 @@ import java.util.Random;
 
 import javax.servlet.annotation.WebServlet;
 
+import com.tehapo.Reel.RollCompletedListener;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.server.VaadinRequest;
@@ -50,6 +51,13 @@ public class GridSlotsUI extends UI {
                 grid2.roll(row2, 3000 + r.nextInt(1000));
                 grid3.roll(row3, 4000 + r.nextInt(1000));
 
+                grid.addRollCompletedListener(new RollCompletedListener() {
+
+                    @Override
+                    public void rollCompleted() {
+                        System.out.println("COMPLETED!");
+                    }
+                });
                 Object itemId = grid.getContainerDataSource().getIdByIndex(row);
                 System.out.println(grid.getContainerDataSource()
                         .getItem(itemId).getItemProperty("").getValue());

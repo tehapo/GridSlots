@@ -12,6 +12,7 @@ window.com_tehapo_ReelRoller = function() {
 
         var delta = targetScrollTop - initialScrollTop;
         var startTime = null;
+        var completionCallback = this.onAnimationComplete;
 
         function animate(timestamp) {
             if (startTime === null) {
@@ -22,6 +23,8 @@ window.com_tehapo_ReelRoller = function() {
             scrollerElem.scrollTop = initialScrollTop + progress * delta;
             if (progress < 1) {
                 window.requestAnimationFrame(animate);
+            } else {
+                completionCallback();
             }
         }
         window.requestAnimationFrame(animate);
