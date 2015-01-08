@@ -68,9 +68,10 @@ public class Reel extends Grid {
     public static interface RollCompletedListener {
 
         public static final Method ROLL_COMPLETED_METHOD = ReflectTools
-                .findMethod(RollCompletedListener.class, "rollCompleted");
+                .findMethod(RollCompletedListener.class, "rollCompleted",
+                        RollCompletedEvent.class);
 
-        void rollCompleted();
+        void rollCompleted(RollCompletedEvent event);
     }
 
 }
