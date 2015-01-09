@@ -30,7 +30,17 @@ public class GridSlotsUI extends UI {
     protected void init(VaadinRequest request) {
         final VerticalLayout layout = new VerticalLayout();
         layout.setMargin(true);
+        layout.setSpacing(true);
         setContent(layout);
+
+        Label coinsRemaining = new Label("COINS 404");
+        coinsRemaining.addStyleName("display");
+        layout.addComponent(coinsRemaining);
+
+        Label status = new Label("WINNER");
+        status.addStyleName("display");
+        status.addStyleName("blink");
+        layout.addComponent(new HorizontalLayout(coinsRemaining, status));
 
         HorizontalLayout reels = new HorizontalLayout();
         reels.setSpacing(true);
@@ -58,31 +68,17 @@ public class GridSlotsUI extends UI {
 
             @Override
             public void buttonClick(ClickEvent event) {
-                int row = r.nextInt(10000);
-                int row2 = r.nextInt(10000);
-                int row3 = r.nextInt(10000);
-                System.out.println(row + ", " + row2 + ", " + row3);
+                int row = r.nextInt(grid.getContainerDataSource().size());
+                int row2 = r.nextInt(grid2.getContainerDataSource().size());
+                int row3 = r.nextInt(grid3.getContainerDataSource().size());
 
                 grid.roll(row, 2000 + r.nextInt(1000));
                 grid2.roll(row2, 3000 + r.nextInt(1000));
                 grid3.roll(row3, 4000 + r.nextInt(1000));
-
-                Object itemId = grid.getContainerDataSource().getIdByIndex(row);
-                System.out.println(grid.getContainerDataSource()
-                        .getItem(itemId).getItemProperty("").getValue());
             }
 
         });
         layout.addComponents(reels, start);
-
-        Label coinsRemaining = new Label("COINS 404");
-        coinsRemaining.addStyleName("display");
-        layout.addComponent(coinsRemaining);
-
-        Label status = new Label("WINNER");
-        status.addStyleName("display");
-        status.addStyleName("blink");
-        layout.addComponent(status);
 
     }
 
