@@ -4,6 +4,7 @@ import java.lang.reflect.Method;
 import java.util.Locale;
 import java.util.Random;
 
+import com.tehapo.model.ReelItem;
 import com.vaadin.data.util.converter.Converter;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.Component;
@@ -44,6 +45,11 @@ public class Reel extends Grid {
     public void roll(int rowIndex, int duration) {
         select(getContainerDataSource().getIdByIndex(rowIndex));
         reelRoller.roll(rowIndex, duration);
+    }
+
+    public ReelItem getValue() {
+        return (ReelItem) getContainerDataSource().getItem(getSelectedRow())
+                .getItemProperty("").getValue();
     }
 
     public void addRollCompletedListener(RollCompletedListener listener) {

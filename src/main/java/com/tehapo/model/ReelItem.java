@@ -1,4 +1,4 @@
-package com.tehapo;
+package com.tehapo.model;
 
 public enum ReelItem {
 

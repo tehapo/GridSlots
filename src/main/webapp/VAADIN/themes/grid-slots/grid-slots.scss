@@ -47,6 +47,11 @@ $display-led-color: #ffb800;
 @mixin grid-slots {
   @include valo;
 
+  .v-button-start {
+      font-size: 40px;
+      font-weight: bold;
+  }
+
   .v-label-display {
       padding: 0 0.5em;
       border: 4px solid #aaa;
