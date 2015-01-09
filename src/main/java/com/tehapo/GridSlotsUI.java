@@ -75,10 +75,10 @@ public class GridSlotsUI extends UI {
                     status.addStyleName("blink");
                 } else {
                     if (coins == 0) {
-                        start.setEnabled(false);
                         status.setValue("GAME OVER");
                     }
                 }
+                start.setEnabled(coins > 0);
             }
         };
         grid3.addRollCompletedListener(rollCompletedListener);
@@ -104,6 +104,7 @@ public class GridSlotsUI extends UI {
         });
         start.addStyleName("start");
         start.setHeight("100px");
+        start.setDisableOnClick(true);
         layout.addComponents(reels, start);
         layout.setComponentAlignment(reels, Alignment.TOP_CENTER);
         start.setWidth("100%");
