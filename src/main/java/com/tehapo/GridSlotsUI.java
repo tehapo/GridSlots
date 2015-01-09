@@ -25,7 +25,7 @@ import com.vaadin.ui.VerticalLayout;
 public class GridSlotsUI extends UI {
 
     @WebServlet(value = "/*", asyncSupported = true)
-    @VaadinServletConfiguration(productionMode = false, ui = GridSlotsUI.class, widgetset = "com.tehapo.GridSlotsWidgetSet")
+    @VaadinServletConfiguration(productionMode = false, ui = GridSlotsUI.class)
     public static class Servlet extends VaadinServlet {
     }
 
