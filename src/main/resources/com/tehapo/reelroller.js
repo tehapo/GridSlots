@@ -24,9 +24,11 @@ window.com_tehapo_ReelRoller = function() {
             if (progress < 1) {
                 window.requestAnimationFrame(animate);
             } else {
+                soundFx.playSound("stop.wav");
                 completionCallback();
             }
         }
+        animate.bind(this);
         window.requestAnimationFrame(animate);
     };
 };

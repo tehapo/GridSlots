@@ -24,6 +24,8 @@ import com.vaadin.ui.VerticalLayout;
 @SuppressWarnings("serial")
 public class GridSlotsUI extends UI {
 
+    private SoundFx soundFx;
+
     @WebServlet(value = "/*", asyncSupported = true)
     @VaadinServletConfiguration(productionMode = false, ui = GridSlotsUI.class)
     public static class Servlet extends VaadinServlet {
@@ -36,6 +38,8 @@ public class GridSlotsUI extends UI {
 
     @Override
     protected void init(VaadinRequest request) {
+        soundFx = new SoundFx(this);
+
         final VerticalLayout layout = new VerticalLayout();
         layout.setMargin(true);
         layout.setSpacing(true);
@@ -73,6 +77,7 @@ public class GridSlotsUI extends UI {
 
                     status.setValue("WINNER, " + payout);
                     status.addStyleName("blink");
+                    soundFx.play("winner.wav");
                 } else {
                     if (coins == 0) {
                         status.setValue("GAME OVER");
