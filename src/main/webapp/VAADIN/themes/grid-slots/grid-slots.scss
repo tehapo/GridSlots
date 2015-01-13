@@ -43,9 +43,31 @@ $display-led-color: #ffb800;
         color: $display-led-color;
     }
 }
+@include keyframes(roll) {
+    0% {
+        @include transform(rotate(0))
+    }
+    100% {
+        @include transform(rotate(360deg))
+    }
+}
 
 @mixin grid-slots {
-  @include valo;
+    @include valo;
+
+    .v-slot-gridslots-logo {
+        text-align: center;
+
+        .gridslots-logo {
+            width: 45%;
+            text-align: center;
+
+            #Star-2 {
+                @include transform-origin(center center);
+                @include animation(roll 6s ease-in-out infinite);
+            }
+        }
+    }
 
   .v-button-start {
       font-size: 40px;
@@ -90,12 +112,12 @@ $display-led-color: #ffb800;
   .v-grid-row {
       .v-grid-cell {
           perspective: 200px;
-          height: 100px !important;
+          height: 80px !important;
           text-align: center;
 
           img {
-              height: 80px;
-              width: 80px;
+              height: 60px;
+              width: 60px;
               margin-top: 10px;
           }
       }

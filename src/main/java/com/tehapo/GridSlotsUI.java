@@ -45,6 +45,8 @@ public class GridSlotsUI extends UI {
         layout.setSpacing(true);
         setContent(layout);
 
+        layout.addComponent(new Logo());
+
         coinsRemaining = new Label("");
         coinsRemaining.addStyleName("display");
         layout.addComponent(coinsRemaining);
