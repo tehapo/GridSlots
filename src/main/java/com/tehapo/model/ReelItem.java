@@ -2,7 +2,7 @@ package com.tehapo.model;
 
 public enum ReelItem {
 
-    GOLD_COIN(0.6), SILVER_COIN(0.4);
+    GOLD_COIN(0.3), SILVER_COIN(0.7);
 
     public final double frequency;
 
