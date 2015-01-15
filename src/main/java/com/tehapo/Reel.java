@@ -29,9 +29,21 @@ public class Reel extends Grid {
 
         final Random r = new Random();
         for (int i = 0; i < 1000; i++) {
-            addRow(ReelItem.values()[r.nextInt(ReelItem.values().length)]);
-
+            ReelItem nextItem = nextRandomItem(r);
+            addRow(nextItem);
         }
+    }
+
+    private ReelItem nextRandomItem(final Random r) {
+        double next = r.nextDouble();
+        double max = 0;
+        for (ReelItem item : ReelItem.values()) {
+            max += item.frequency;
+            if (next <= max) {
+                return item;
+            }
+        }
+        return ReelItem.values()[0]; // Should never get here.
     }
 
     /**
