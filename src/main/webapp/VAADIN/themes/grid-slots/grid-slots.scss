@@ -44,10 +44,7 @@ $display-led-color: #ffb800;
     }
 }
 @include keyframes(roll) {
-    0% {
-        @include transform(rotate(0))
-    }
-    100% {
+    to {
         @include transform(rotate(360deg))
     }
 }
@@ -63,7 +60,7 @@ $display-led-color: #ffb800;
             text-align: center;
 
             #Star-2 {
-                @include transform-origin(center center);
+                @include transform-origin(50% 50%);
                 @include animation(roll 6s ease-in-out infinite);
             }
         }
