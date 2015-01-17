@@ -23,7 +23,7 @@ var soundFx = {
             var source = this.audioContext.createBufferSource();
             source.buffer = this.sounds[name];
             source.connect(this.audioContext.destination);
-            source.start(0);
+            source.start();
         }
     },
 
@@ -33,6 +33,15 @@ var soundFx = {
             this.audioContext = new AudioContext();
             this.loadSound("stop.wav");
             this.loadSound("winner.wav");
+
+            // Workaround for iOS requiring user interaction before enabling Web Audio.
+            if (navigator.userAgent.match(/(iPad|iPhone|iPod)/i)) {
+                this.workaround = function() {
+                    this.playSound("stop.wav");
+                    document.body.removeEventListener("touchstart", this.workaround);
+                }.bind(this);
+                document.body.addEventListener("touchstart", this.workaround);
+            }
         } catch (e) {
             console.log("Web Audio not supported.");
         }
