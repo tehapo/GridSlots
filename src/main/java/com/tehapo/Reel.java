@@ -19,7 +19,7 @@ public class Reel extends Grid {
 
     public Reel() {
         setWidth("200px");
-        setHeight("400px");
+        setHeight("500px");
         setHeaderVisible(false);
         setSelectionMode(SelectionMode.SINGLE);
         addColumn("", ReelItem.class).setRenderer(new ImageRenderer(),

@@ -106,15 +106,21 @@ $display-led-color: #ffb800;
         border: none;
     }
 
+    .v-grid-row-selected > .v-grid-cell {
+        background: #fff;
+        border-top: 1px solid red;
+        border-bottom: 1px solid red;
+    }
+
     .v-grid-row {
         .v-grid-cell {
             perspective: 200px;
-            height: 80px !important;
+            height: 100px !important;
             text-align: center;
 
             img {
-                height: 60px;
-                width: 60px;
+                height: 80px;
+                width: 80px;
                 margin-top: 10px;
             }
         }

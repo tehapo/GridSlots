@@ -12,6 +12,8 @@ public class Payouts {
                 ReelItem.GOLD_COIN), 10);
         payoutMap.put(new RollResult(ReelItem.SILVER_COIN,
                 ReelItem.SILVER_COIN, ReelItem.SILVER_COIN), 5);
+        payoutMap.put(new RollResult(ReelItem.LOGO_COIN, ReelItem.LOGO_COIN,
+                ReelItem.LOGO_COIN), 3);
     }
 
     public static Integer getPayout(RollResult roll) {
