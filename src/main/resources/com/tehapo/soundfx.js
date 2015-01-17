@@ -23,7 +23,7 @@ var soundFx = {
             var source = this.audioContext.createBufferSource();
             source.buffer = this.sounds[name];
             source.connect(this.audioContext.destination);
-            source.start();
+            source.start(0);
         }
     },
 
