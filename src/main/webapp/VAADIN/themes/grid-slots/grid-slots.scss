@@ -53,8 +53,9 @@ $display-led-color: #ffb800;
     @include valo;
 
     &.v-app {
-        background: #2b5a80 url(img/background-stripes.png) no-repeat;
+        background: #2b5a80 url(img/background-stripes.svg) no-repeat;
         background-position: 50% 50%;
+        background-size: cover;
         text-align: center;
     }
 
