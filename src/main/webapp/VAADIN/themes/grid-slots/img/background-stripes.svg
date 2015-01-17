@@ -11,6 +11,15 @@
     </defs>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
         <g id="Group" sketch:type="MSLayerGroup" fill="url(#linearGradient-1)">
+          <animateTransform
+              attributeName="transform"
+              attributeType="XML"
+              type="rotate"
+              from="0 706 706"
+              to="360 706 706"
+              dur="180s"
+              repeatCount="indefinite"
+              />
             <g transform="translate(14.000000, 0.000000)" sketch:type="MSShapeGroup">
                 <path d="M652,0 L732,0 L692,707 L652,0 Z" id="Rectangle-2"></path>
                 <path d="M476,47 L556,47 L516,754 L476,47 Z" id="Rectangle-4" transform="translate(516.000000, 400.500000) rotate(-30.000000) translate(-516.000000, -400.500000) "></path>
