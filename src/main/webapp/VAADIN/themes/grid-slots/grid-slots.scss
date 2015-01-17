@@ -53,15 +53,15 @@ $display-led-color: #ffb800;
     @include valo;
 
     &.v-app {
-        background: #003 url(img/background-stripes.png) no-repeat;
-        background-size: 100% 100%;
+        background: #2b5a80 url(img/background-stripes.png) no-repeat;
+        background-position: 50% 50%;
         text-align: center;
     }
 
     .main {
         text-align: left;
         background: #fafafa;
-        height: 100%;
+        min-height: 100%;
     }
 
     .v-slot-gridslots-logo {
