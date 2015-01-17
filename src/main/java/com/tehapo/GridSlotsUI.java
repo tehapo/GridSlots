@@ -12,6 +12,7 @@ import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
+import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
@@ -19,6 +20,7 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.themes.ValoTheme;
 
 @Theme("grid-slots")
 @SuppressWarnings("serial")
@@ -31,10 +33,12 @@ public class GridSlotsUI extends UI {
     public static class Servlet extends VaadinServlet {
     }
 
-    private int coins = 10;
-    private Label coinsRemaining;
-    private Label status;
+    private Label statusDisplay;
     private Button start;
+
+    // "Model"
+    private String status;
+    private int coins = 10;
 
     @Override
     protected void init(VaadinRequest request) {
@@ -49,17 +53,10 @@ public class GridSlotsUI extends UI {
 
         layout.addComponent(new Logo());
 
-        coinsRemaining = new Label("");
-        coinsRemaining.addStyleName("display");
-        layout.addComponent(coinsRemaining);
-        updateCoins();
-
-        status = new Label("-");
-        status.addStyleName("display");
-        HorizontalLayout displays = new HorizontalLayout(coinsRemaining, status);
-        displays.setSpacing(true);
-        displays.setWidth("100%");
-        layout.addComponent(displays);
+        statusDisplay = new Label("-", ContentMode.HTML);
+        statusDisplay.addStyleName("display");
+        updateStatus();
+        layout.addComponent(statusDisplay);
 
         HorizontalLayout reels = new HorizontalLayout();
         reels.setSpacing(true);
@@ -77,16 +74,16 @@ public class GridSlotsUI extends UI {
                 Integer payout = Payouts.getPayout(result);
                 if (payout != null) {
                     coins += payout;
-                    updateCoins();
-
-                    status.setValue("WINNER, " + payout);
-                    status.addStyleName("blink");
+                    status = "WINNER, " + payout;
+                    statusDisplay.addStyleName("blink");
                     soundFx.play("winner.wav");
+
                 } else {
                     if (coins == 0) {
-                        status.setValue("GAME OVER");
+                        status = "GAME OVER";
                     }
                 }
+                updateStatus();
                 start.setEnabled(coins > 0);
             }
         };
@@ -98,8 +95,8 @@ public class GridSlotsUI extends UI {
             @Override
             public void buttonClick(ClickEvent event) {
                 coins--;
-                updateCoins();
-                status.removeStyleName("blink");
+                updateStatus();
+                statusDisplay.removeStyleName("blink");
 
                 int row = r.nextInt(grid.getContainerDataSource().size());
                 int row2 = r.nextInt(grid2.getContainerDataSource().size());
@@ -111,16 +108,18 @@ public class GridSlotsUI extends UI {
             }
 
         });
+        start.addStyleName(ValoTheme.BUTTON_HUGE);
+        start.addStyleName(ValoTheme.BUTTON_PRIMARY);
         start.addStyleName("start");
-        start.setHeight("100px");
         start.setDisableOnClick(true);
         layout.addComponents(reels, start);
         layout.setComponentAlignment(reels, Alignment.TOP_CENTER);
         start.setWidth("100%");
     }
 
-    private void updateCoins() {
-        coinsRemaining.setValue("COINS " + coins);
+    private void updateStatus() {
+        statusDisplay.setValue("COINS " + coins + "<span>"
+                + (status != null ? status : "") + "</span>");
     }
 
 }

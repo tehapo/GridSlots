@@ -30,6 +30,7 @@
 @import "../valo/valo.scss";
 
 $display-led-color: #ffb800;
+$theme-color: #2b5a80;
 
 @include keyframes(blink) {
     0% {
@@ -50,10 +51,11 @@ $display-led-color: #ffb800;
 }
 
 @mixin grid-slots {
+
     @include valo;
 
     &.v-app {
-        background: #2b5a80 url(img/background-stripes.svg) no-repeat;
+        background: $theme-color url(img/background-stripes.svg) no-repeat;
         background-position: 50% 50%;
         background-size: cover;
         text-align: center;
@@ -66,8 +68,10 @@ $display-led-color: #ffb800;
 
     .main {
         text-align: left;
-        background: #fafafa;
+        background: #ddd url(img/noise.png) repeat;
         min-height: 100%;
+        outline: 10px solid darken($theme-color, 10%);
+        padding: 10px 140px;
     }
 
     .v-slot-gridslots-logo {
@@ -84,19 +88,30 @@ $display-led-color: #ffb800;
         }
     }
 
-    .v-button-start {
-        font-size: 40px;
-        font-weight: bold;
+    .v-slot-start {
+        perspective: 1000px;
+
+        .v-button-start {
+            font-size: 40px;
+            font-weight: bold;
+            line-height: 40px;
+
+            &.v-disabled {
+                opacity: 0.6;
+                @include transform(scale(0.98) rotateX(20deg));
+                @include transition(all 200ms);
+            }
+        }
     }
 
     .v-label-display {
         padding: 0 0.5em;
-        border: 4px solid #aaa;
+        border: 4px solid #888;
         background: #222;
         color: $display-led-color;
         text-shadow: 0px 0px 10px lighten($display-led-color, 10%);
         font-weight: bold;
-        font-size: 50px;
+        font-size: 44px;
         position: relative;
 
         &:before {
@@ -114,6 +129,14 @@ $display-led-color: #ffb800;
         &.blink {
             @include animation(blink 600ms linear 3);
         }
+
+        span {
+            float: right;
+        }
+    }
+
+    .v-grid {
+        background: transparent;
     }
 
     .v-grid-scroller-vertical::-webkit-scrollbar {
@@ -135,6 +158,7 @@ $display-led-color: #ffb800;
             perspective: 200px;
             height: 100px !important;
             text-align: center;
+            background: transparent;
 
             img {
                 height: 80px;
@@ -152,6 +176,8 @@ $display-led-color: #ffb800;
 
     .v-grid-tablewrapper {
         border: none;
+        background: #fff;
+        border-radius: 10px;
     }
 
     .v-grid-footer {
@@ -161,8 +187,8 @@ $display-led-color: #ffb800;
         left: 0;
         right: 0;
 
-        border-radius: 10px;
         @include box-sizing(border-box);
+        border-radius: 10px;
 
         box-shadow: inset 0px 2px 7px rgba(0, 0, 0, 0.6);
         background-color: transparent !important;
