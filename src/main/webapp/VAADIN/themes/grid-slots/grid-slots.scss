@@ -52,11 +52,23 @@ $display-led-color: #ffb800;
 @mixin grid-slots {
     @include valo;
 
+    &.v-app {
+        background: #003 url(img/background-stripes.png) no-repeat;
+        background-size: 100% 100%;
+        text-align: center;
+    }
+
+    .main {
+        text-align: left;
+        background: #fafafa;
+        height: 100%;
+    }
+
     .v-slot-gridslots-logo {
         text-align: center;
 
         .gridslots-logo {
-            width: 45%;
+            width: 500px;
             text-align: center;
 
             #Star-2 {

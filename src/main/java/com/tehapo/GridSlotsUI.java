@@ -41,8 +41,10 @@ public class GridSlotsUI extends UI {
         soundFx = new SoundFx(this);
 
         final VerticalLayout layout = new VerticalLayout();
+        layout.setWidth("850px");
         layout.setMargin(true);
         layout.setSpacing(true);
+        layout.addStyleName("main");
         setContent(layout);
 
         layout.addComponent(new Logo());
