@@ -10,6 +10,7 @@ import com.tehapo.model.Payouts;
 import com.tehapo.model.RollResult;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
+import com.vaadin.event.ShortcutAction;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.shared.ui.label.ContentMode;
@@ -73,10 +74,12 @@ public class GridSlotsUI extends UI implements RollCompletedListener {
 
             @Override
             public void buttonClick(ClickEvent event) {
+                start.setEnabled(false);
                 roll();
             }
 
         });
+        start.setClickShortcut(ShortcutAction.KeyCode.SPACEBAR);
         start.addStyleName(ValoTheme.BUTTON_HUGE);
         start.addStyleName(ValoTheme.BUTTON_PRIMARY);
         start.addStyleName("start");
