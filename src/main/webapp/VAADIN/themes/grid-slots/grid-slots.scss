@@ -55,15 +55,10 @@ $theme-color: #2b5a80;
     @include valo;
 
     &.v-app {
-        background: $theme-color url(img/background-stripes.svg) no-repeat;
+        background: $theme-color url(img/background-stripes-static.svg) no-repeat;
         background-position: 50% 50%;
         background-size: cover;
         text-align: center;
-
-        body.v-touch & {
-            /* Use touch class to target mobile devices. */
-            background-image: url(img/background-stripes-static.svg);
-        }
     }
 
     .main {
