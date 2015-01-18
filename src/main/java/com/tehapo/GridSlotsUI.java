@@ -24,7 +24,7 @@ import com.vaadin.ui.themes.ValoTheme;
 
 @Theme("grid-slots")
 @SuppressWarnings("serial")
-public class GridSlotsUI extends UI {
+public class GridSlotsUI extends UI implements RollCompletedListener {
 
     private SoundFx soundFx;
 
@@ -39,6 +39,9 @@ public class GridSlotsUI extends UI {
     // "Model"
     private String status;
     private int coins = 10;
+    private Reel reel1;
+    private Reel reel2;
+    private Reel reel3;
 
     @Override
     protected void init(VaadinRequest request) {
@@ -60,51 +63,17 @@ public class GridSlotsUI extends UI {
 
         HorizontalLayout reels = new HorizontalLayout();
         reels.setSpacing(true);
-        final Reel grid = new Reel();
-        final Reel grid2 = new Reel();
-        final Reel grid3 = new Reel();
-        reels.addComponents(grid, grid2, grid3);
+        reel1 = new Reel();
+        reel2 = new Reel();
+        reel3 = new Reel();
+        reel3.addRollCompletedListener(this);
+        reels.addComponents(reel1, reel2, reel3);
 
-        RollCompletedListener rollCompletedListener = new RollCompletedListener() {
-
-            @Override
-            public void rollCompleted(RollCompletedEvent event) {
-                RollResult result = new RollResult(grid.getValue(),
-                        grid2.getValue(), grid3.getValue());
-                Integer payout = Payouts.getPayout(result);
-                if (payout != null) {
-                    coins += payout;
-                    status = "WINNER, " + payout;
-                    statusDisplay.addStyleName("blink");
-                    soundFx.play("winner.wav");
-
-                } else {
-                    if (coins == 0) {
-                        status = "GAME OVER";
-                    }
-                }
-                updateStatus();
-                start.setEnabled(coins > 0);
-            }
-        };
-        grid3.addRollCompletedListener(rollCompletedListener);
-
-        final Random r = new Random();
         start = new Button("Roll", new Button.ClickListener() {
 
             @Override
             public void buttonClick(ClickEvent event) {
-                coins--;
-                updateStatus();
-                statusDisplay.removeStyleName("blink");
-
-                int row = r.nextInt(grid.getContainerDataSource().size());
-                int row2 = r.nextInt(grid2.getContainerDataSource().size());
-                int row3 = r.nextInt(grid3.getContainerDataSource().size());
-
-                grid.roll(row, 1000 + r.nextInt(1000));
-                grid2.roll(row2, 2000 + r.nextInt(1000));
-                grid3.roll(row3, 3000 + r.nextInt(1000));
+                roll();
             }
 
         });
@@ -115,6 +84,41 @@ public class GridSlotsUI extends UI {
         layout.addComponents(reels, start);
         layout.setComponentAlignment(reels, Alignment.TOP_CENTER);
         start.setWidth("100%");
+    }
+
+    @Override
+    public void rollCompleted(RollCompletedEvent event) {
+        RollResult result = new RollResult(reel1.getValue(), reel2.getValue(),
+                reel3.getValue());
+        Integer payout = Payouts.getPayout(result);
+        if (payout != null) {
+            coins += payout;
+            status = "WINNER, " + payout;
+            statusDisplay.addStyleName("blink");
+            soundFx.play("winner.wav");
+
+        } else {
+            if (coins == 0) {
+                status = "GAME OVER";
+            }
+        }
+        updateStatus();
+        start.setEnabled(coins > 0);
+    }
+
+    private void roll() {
+        coins--;
+        updateStatus();
+        statusDisplay.removeStyleName("blink");
+
+        final Random r = new Random();
+        int row = r.nextInt(reel1.getContainerDataSource().size());
+        int row2 = r.nextInt(reel2.getContainerDataSource().size());
+        int row3 = r.nextInt(reel3.getContainerDataSource().size());
+
+        reel1.roll(row, 1000 + r.nextInt(1000));
+        reel2.roll(row2, 2000 + r.nextInt(1000));
+        reel3.roll(row3, 3000 + r.nextInt(1000));
     }
 
     private void updateStatus() {
