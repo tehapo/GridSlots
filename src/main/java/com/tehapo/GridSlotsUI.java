@@ -27,22 +27,22 @@ import com.vaadin.ui.themes.ValoTheme;
 @SuppressWarnings("serial")
 public class GridSlotsUI extends UI implements RollCompletedListener {
 
-    private SoundFx soundFx;
-
     @WebServlet(value = "/*", asyncSupported = true)
     @VaadinServletConfiguration(productionMode = false, ui = GridSlotsUI.class)
     public static class Servlet extends VaadinServlet {
     }
 
+    // UI
+    private SoundFx soundFx;
     private Label statusDisplay;
     private Button start;
+    private Reel reel1;
+    private Reel reel2;
+    private Reel reel3;
 
     // "Model"
     private String status;
     private int coins = 10;
-    private Reel reel1;
-    private Reel reel2;
-    private Reel reel3;
 
     @Override
     protected void init(VaadinRequest request) {
