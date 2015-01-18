@@ -63,7 +63,11 @@ $theme-color: #2b5a80;
 
     .main {
         text-align: left;
-        background: #ddd url(img/noise.png) repeat;
+        background-color: #fff;
+        @include background-image(
+            url(img/noise.png),
+            radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.2) 70%, rgba(0, 0, 0, 0.6) 100%)
+        );
         min-height: 100%;
         outline: 10px solid darken($theme-color, 10%);
         padding: 10px 140px;
