@@ -7,3 +7,5 @@ Just run Jetty as follows and start your gambling at http://localhost:8080
 ```bash
 mvn jetty:run
 ```
+
+![GridSlots](https://raw.githubusercontent.com/tehapo/GridSlots/master/screenshot.png)
